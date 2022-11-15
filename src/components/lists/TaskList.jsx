@@ -15,7 +15,7 @@ const TaskList = ({ showSettings, setShowSettings}) => {
     ]);
 		
 		useEffect(()=>{
-			getAll()
+			getAll();
 		},[]);
 
     return (
