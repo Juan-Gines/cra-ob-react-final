@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useList from '../../hooks/useList';
 import { motion } from 'framer-motion';
 
@@ -10,9 +10,13 @@ import { motion } from 'framer-motion';
 
 const TaskList = ({ showSettings, setShowSettings}) => {
     const {
-      value, item, editItem, isEmpty, push, toggleCompleted,
+      value, item, editItem, isEmpty, push, toggleCompleted, getAll
     } = useList([
-    ]);    
+    ]);
+		
+		useEffect(()=>{
+			getAll()
+		},[]);
 
     return (
 			<>
@@ -48,16 +52,16 @@ const TaskList = ({ showSettings, setShowSettings}) => {
 					<p>Task List is Empty</p>
 				) : (
 					<ul>
-						{value.map((task, index) => (
+						{value.map((task) => (
 							<motion.li 
 								initial={{ x: '100vw'}} 
 								animate={{ x: '0' }}
 								transition={{ duration: '.3'}}
-								key={index}>
-								<label>
+								key={task.id}>
+								<label className='cursor-pointer'>
 									<input
 										type='checkbox'
-										onClick={() => toggleCompleted(index)}
+										onClick={() => toggleCompleted(task.id)}
 										checked={task.completed}
 									/>
 									<span
@@ -65,7 +69,7 @@ const TaskList = ({ showSettings, setShowSettings}) => {
 											task.completed && 'line-through'
 										}`}
 									>
-										{task.texto}
+										{task.task}
 									</span>
 								</label>
 							</motion.li>
