@@ -15,8 +15,9 @@ const App = () => {
 	 * Se crea una variable de estado donde se almacena en localstorage
 	 */
 	useEffect(() => {
-		const config = JSON.parse(localStorage.getItem('config'));
-		setDark(config.theme);
+		/* const config = JSON.parse(localStorage.getItem('config'));
+		setDark(config.theme); */
+		setDark(true);
 	}, []);
 
 	/**
@@ -41,6 +42,7 @@ const App = () => {
 						<motion.div
               initial={{ y: '100vh' }}
               animate={{ y: '0' }}
+							transition={{ duration: '0.5'}}
               exit={{ y: '100vh' }}
             >
 							<Settings toggleDark={toggleDark} />
